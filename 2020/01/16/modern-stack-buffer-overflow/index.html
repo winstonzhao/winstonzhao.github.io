@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Address Space Layout Randomization (ALSR)ALSR is the process by which the addresses for particular sections of a program (the stack in the Linux kernel) are randomized to prevent exploits from targeti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Binary Exploitation - Modern Stack Buffer Overflow Countermeasures">
+<meta property="og:url" content="http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/index.html">
+<meta property="og:site_name" content="Winston&#39;s Blog">
+<meta property="og:description" content="Address Space Layout Randomization (ALSR)ALSR is the process by which the addresses for particular sections of a program (the stack in the Linux kernel) are randomized to prevent exploits from targeti">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-01-15T23:22:07.000Z">
+<meta property="article:modified_time" content="2020-04-28T14:09:39.120Z">
+<meta property="article:author" content="Winston Zhao">
+<meta property="article:tag" content="Security">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/logo.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/logo.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
+          
+        
+    
+    <!-- title -->
+    <title>Binary Exploitation - Modern Stack Buffer Overflow Countermeasures</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/02/19/Knowledge/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/01/06/binary-exploitation-protostar-heap/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&text=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&title=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&is_video=false&description=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures&body=Check out this article: http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&title=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&title=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&title=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&title=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&name=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&t=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Address-Space-Layout-Randomization-ALSR"><span class="toc-number">1.</span> <span class="toc-text">Address Space Layout Randomization (ALSR)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Position-Independent-Executable-PIE"><span class="toc-number">2.</span> <span class="toc-text">Position Independent Executable (PIE)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Stack-Variable-Reordering"><span class="toc-number">3.</span> <span class="toc-text">Stack Variable Reordering</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Stack-Canary"><span class="toc-number">4.</span> <span class="toc-text">Stack Canary</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Binary Exploitation - Modern Stack Buffer Overflow Countermeasures
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Winston's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-01-15T23:22:07.000Z" itemprop="datePublished">2020-01-16</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Security/" rel="tag">Security</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Address-Space-Layout-Randomization-ALSR"><a href="#Address-Space-Layout-Randomization-ALSR" class="headerlink" title="Address Space Layout Randomization (ALSR)"></a>Address Space Layout Randomization (ALSR)</h1><p>ALSR is the process by which the addresses for particular sections of a program (the stack in the Linux kernel) are randomized to prevent exploits from targeting a particular address. This can be demonstrated using a simple program.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%x\n"</span>,(<span class="keyword">unsigned</span> <span class="keyword">int</span>)&amp;x);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Running this a couple of times will yield the following result:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ffe61c68</span><br><span class="line">ffb43b28</span><br><span class="line">ffa70a08</span><br><span class="line">ffe70398</span><br><span class="line">ffda4b18</span><br><span class="line">ffc00538</span><br><span class="line">ff9a6478</span><br><span class="line">ffdfaf88</span><br><span class="line">ffda0258</span><br><span class="line">ffb25508</span><br></pre></td></tr></table></figure>
+<p>We can see that the results each have 5 random bytes within them that would need to be known if attempting to smash the stack.</p>
+<h1 id="Position-Independent-Executable-PIE"><a href="#Position-Independent-Executable-PIE" class="headerlink" title="Position Independent Executable (PIE)"></a>Position Independent Executable (PIE)</h1><p>PIE/PIC (Position Independent Code) is used to describe a program that can be run from anywhere in memory regardless of its absolute address. This differs from absolute code, in that position-independent code can be executed at any memory address without modifications. This is usually for loading in shared libraries at different addresses in programs virtual memory spaces.</p>
+<p>The primary purpose of PIE is not for security reasons, it acts as a way to prevent exploits from knowing the exact address of specific instructions when used with ASLR. We can show this using the following program:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%x\n"</span>,(<span class="keyword">unsigned</span> <span class="keyword">int</span>)&amp;<span class="built_in">printf</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Gives us the output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">f7e052d0</span><br><span class="line">f7df62d0</span><br><span class="line">f7df82d0</span><br><span class="line">f7dee2d0</span><br><span class="line">f7deb2d0</span><br><span class="line">f7dd52d0</span><br><span class="line">f7e1e2d0</span><br><span class="line">f7d4b2d0</span><br><span class="line">f7de22d0</span><br><span class="line">f7dec2d0</span><br></pre></td></tr></table></figure>
+<p>This makes attacks using <code>ret-to-lib</code> methods extremely difficult.</p>
+<h1 id="Stack-Variable-Reordering"><a href="#Stack-Variable-Reordering" class="headerlink" title="Stack Variable Reordering"></a>Stack Variable Reordering</h1><p>If we look at following code:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> y[<span class="number">5</span>];</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">3</span>;</span><br><span class="line">        y[<span class="number">0</span>] = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We can see that if we overflow <code>y</code>, we can be able to overwrite <code>x</code>. This would be true in older systems, however if we inspect the ASM for newer systems.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0x000005ad &lt;+48&gt;:	mov    DWORD PTR [ebp-0x24],0x3</span><br><span class="line">0x000005b4 &lt;+55&gt;:	mov    DWORD PTR [ebp-0x20],0xa</span><br></pre></td></tr></table></figure>
+
+<p>We find that arrays and buffers are deemed to be high risk data structures. Therefore, variables will be ordered such that the high risk structures are placed towards the top of the stack frame and the lower risk structures are placed towards the bottom, this means that any buffer overflow will not overwrite lower risk variables.</p>
+<h1 id="Stack-Canary"><a href="#Stack-Canary" class="headerlink" title="Stack Canary"></a>Stack Canary</h1><p>A stack canary is a random value that is stored in the stack at the beginning of the function and is checked for integrity at the end. If the stack canary has been overwritten, the program will throw stack check error and output to the console that stack smashing has been detected.</p>
+<p>We can see the value being stored here:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0x565555a1 &lt;+36&gt;:	mov    ecx,DWORD PTR gs:0x14</span><br><span class="line">0x565555a8 &lt;+43&gt;:	mov    DWORD PTR [ebp-0xc],ecx</span><br></pre></td></tr></table></figure>
+<p>The stack canary is extracted from <code>gs:0x14</code> and stored into <code>[ebp-0xc]</code>.<br>We then check that this value doesn’t change at the end of the function.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0x565555df &lt;+98&gt;:	mov    ebx,DWORD PTR [ebp-0xc]</span><br><span class="line">0x565555e2 &lt;+101&gt;:	xor    ebx,DWORD PTR gs:0x14</span><br><span class="line">0x565555e9 &lt;+108&gt;:	je     0x565555f0 &lt;main+115&gt;</span><br><span class="line">0x565555eb &lt;+110&gt;:	call   0x56555670 &lt;__stack_chk_fail_local&gt;</span><br></pre></td></tr></table></figure>
+<p>We compare the value from the stack and the original value from <code>gs:0x10</code>  using the <code>xor</code> instruction and then we will either jump to <code>__stack_chk_fail_local</code> or continue, depending on whether the value matches or not.</p>
+<p>Some example canaries:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">927fb500</span><br><span class="line">19e92b00</span><br><span class="line">19c5ee00</span><br><span class="line">1e301100</span><br><span class="line">564b7500</span><br><span class="line">41443700</span><br><span class="line">b546f100</span><br><span class="line">9622da00</span><br></pre></td></tr></table></figure>
+
+<p>Notice that for a 32-bit device, the canary has only 24 random bits, this means that there are only ~16 million unique combinations. The last bit is a null byte to acts as a string terminator to prevent exploits using <code>strmp</code> from propagating through the canary.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Address-Space-Layout-Randomization-ALSR"><span class="toc-number">1.</span> <span class="toc-text">Address Space Layout Randomization (ALSR)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Position-Independent-Executable-PIE"><span class="toc-number">2.</span> <span class="toc-text">Position Independent Executable (PIE)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Stack-Variable-Reordering"><span class="toc-number">3.</span> <span class="toc-text">Stack Variable Reordering</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Stack-Canary"><span class="toc-number">4.</span> <span class="toc-text">Stack Canary</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&text=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&title=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&is_video=false&description=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures&body=Check out this article: http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&title=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&title=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&title=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&title=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&name=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/01/16/modern-stack-buffer-overflow/&t=Binary Exploitation - Modern Stack Buffer Overflow Countermeasures" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Winston Zhao
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="To prepare for my upcoming job, I’ve been searching for C++ projects.  I saw this post on reddit around a year ago and I thought,  *”I could do (copy) that”*.  ResultsAvengers Trailer Sicko Mode - Tra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Average Frame of a Movie">
+<meta property="og:url" content="http://yoursite.com/2020/04/29/hello-world/index.html">
+<meta property="og:site_name" content="Winston&#39;s Blog">
+<meta property="og:description" content="To prepare for my upcoming job, I’ve been searching for C++ projects.  I saw this post on reddit around a year ago and I thought,  *”I could do (copy) that”*.  ResultsAvengers Trailer Sicko Mode - Tra">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/images/avengers.png">
+<meta property="og:image" content="http://yoursite.com/images/sicko_mode.png">
+<meta property="og:image" content="http://yoursite.com/images/lsd.png">
+<meta property="og:image" content="http://yoursite.com/images/california_gurls.png">
+<meta property="og:image" content="http://yoursite.com/images/the_search.png">
+<meta property="og:image" content="http://yoursite.com/images/avengers.png">
+<meta property="og:image" content="http://yoursite.com/images/avengers_mode.png">
+<meta property="article:published_time" content="2020-04-28T14:09:39.116Z">
+<meta property="article:modified_time" content="2020-04-28T14:09:39.120Z">
+<meta property="article:author" content="Winston Zhao">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/avengers.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/logo.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/logo.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
+          
+        
+    
+    <!-- title -->
+    <title>Average Frame of a Movie</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/04/29/Finding-Asian-Girls-on-Tinder/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/02/19/Knowledge/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/04/29/hello-world/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/04/29/hello-world/&text=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/04/29/hello-world/&title=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/04/29/hello-world/&is_video=false&description=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Average Frame of a Movie&body=Check out this article: http://yoursite.com/2020/04/29/hello-world/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/04/29/hello-world/&title=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/04/29/hello-world/&title=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/04/29/hello-world/&title=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/04/29/hello-world/&title=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/04/29/hello-world/&name=Average Frame of a Movie&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/04/29/hello-world/&t=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Results"><span class="toc-number">1.</span> <span class="toc-text">Results</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Splitting-an-Image-into-Frames"><span class="toc-number">2.</span> <span class="toc-text">Splitting an Image into Frames</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reading-Images-into-Memory"><span class="toc-number">3.</span> <span class="toc-text">Reading Images into Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Writing-Images-to-Disk"><span class="toc-number">4.</span> <span class="toc-text">Writing Images to Disk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Finding-the-Mean-Color"><span class="toc-number">5.</span> <span class="toc-text">Finding the Mean Color</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Using-Mode-Color"><span class="toc-number">6.</span> <span class="toc-text">Using Mode Color</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Average Frame of a Movie
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Winston's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-04-28T14:09:39.116Z" itemprop="datePublished">2020-04-29</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/C/" rel="tag">C++</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>To prepare for my upcoming job, I’ve been searching for C++ projects.  I saw this post on <a href="https://www.reddit.com/r/dataisbeautiful/comments/3rb8zi/the_average_color_of_every_frame_of_a_given_movie/" target="_blank" rel="noopener">reddit</a> around a year ago and I thought,  *”I could do (copy) that”*. </p>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><p>Avengers Trailer<br><img src="/images/avengers.png" alt=""></p>
+<p>Sicko Mode - Travis Scott<br><img src="/images/sicko_mode.png" alt=""></p>
+<p>L$D - ASAP Rocky<br><img src="/images/lsd.png" alt=""></p>
+<p>California Gurls - Katy Perry<br><img src="/images/california_gurls.png" alt=""></p>
+<p>The Search - NF<br><img src="/images/the_search.png" alt=""></p>
+<h3 id="Splitting-an-Image-into-Frames"><a href="#Splitting-an-Image-into-Frames" class="headerlink" title="Splitting an Image into Frames"></a>Splitting an Image into Frames</h3><p>To manually extract the frames of a media file, you would have to account for the compression algorithms to calculate the pixel values of each frame. This would be extremely complex, so I just googled instead and found <a href="https://www.bugcodemaster.com/article/extract-images-frame-frame-video-file-using-ffmpeg" target="_blank" rel="noopener">this</a>.</p>
+<p>We can use the following <code>ffmpeg</code> command that does what we want and will create a bunch of bitmap files that correspond to the frames of the video.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video.webm thumb%d.bmp -hide_banner</span><br></pre></td></tr></table></figure>
+<p>Bitmap is simple format without any compression and thus is a good format to use for this project.</p>
+<h3 id="Reading-Images-into-Memory"><a href="#Reading-Images-into-Memory" class="headerlink" title="Reading Images into Memory"></a>Reading Images into Memory</h3><p>I copied the following code from <a href="https://stackoverflow.com/questions/9296059/read-pixel-value-in-bmp-file" target="_blank" rel="noopener">stackoverflow</a>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">FILE *f =  fopen(filename.c_str(),  <span class="string">"rb"</span>);</span><br><span class="line"><span class="keyword">unsigned</span>  <span class="keyword">char</span>  info[<span class="number">54</span>];</span><br><span class="line">fread(info,  <span class="keyword">sizeof</span>(<span class="keyword">unsigned</span>  <span class="keyword">char</span>),  <span class="number">54</span>, f); <span class="comment">// read the 54-byte header</span></span><br><span class="line"><span class="comment">// extract image height and width from header</span></span><br><span class="line"><span class="keyword">int</span> width, height;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">memcpy</span>(&amp;width, info +  <span class="number">18</span>,  <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">memcpy</span>(&amp;height, info +  <span class="number">22</span>,  <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line"><span class="keyword">int</span> size =  <span class="number">3</span>  * width *  <span class="built_in">abs</span>(height);</span><br><span class="line"><span class="keyword">unsigned</span>  <span class="keyword">char</span>  *data =  <span class="keyword">new</span>  <span class="keyword">unsigned</span>  <span class="keyword">char</span>[size]; <span class="comment">// allocate 3 bytes per pixel</span></span><br><span class="line">fread(data,  <span class="keyword">sizeof</span>(<span class="keyword">unsigned</span>  <span class="keyword">char</span>), size, f); <span class="comment">// read the rest of the data at once</span></span><br><span class="line">fclose(f);</span><br></pre></td></tr></table></figure>
+<p>After finishing the project, I decided to actually learn how this code worked.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FILE *f =  fopen(filename.c_str(),  <span class="string">"rb"</span>);</span><br></pre></td></tr></table></figure>
+<p><code>fopen</code> returns a stream of the data of the file, however by default <code>fopen</code> is used for text files. However, by specifying <strong>rb</strong> as the mode, we let <code>fopen</code> know that we want to <strong>r</strong>ead  <strong>b</strong>inary.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fread(info,  <span class="keyword">sizeof</span>(<span class="keyword">unsigned</span>  <span class="keyword">char</span>),  <span class="number">54</span>, f);</span><br></pre></td></tr></table></figure>
+<p>If we look at the bitmap file format information on <a href="https://en.wikipedia.org/wiki/BMP_file_format" target="_blank" rel="noopener">wikipedia</a>.  We can assume that the total length of file headers are  54 bytes.</p>
+<p>There are various versions of headers that the bitmap file may have, and for a more robust approach we would need to take the other versions into consideration. However, for this project it suffices to to assume the <code>BITMAPINFOHEADER</code> version.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">memcpy</span>(&amp;width, info +  <span class="number">18</span>,  <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">memcpy</span>(&amp;height, info +  <span class="number">22</span>,  <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line"><span class="keyword">int</span> size =  <span class="number">3</span>  * width *  <span class="built_in">abs</span>(height);</span><br></pre></td></tr></table></figure>
+
+<p>After extracting the width and the height of the image we can calculate the size of the pixel data in the image. Each pixel is represented by three 8bit integers representing the respective <code>RGB</code> values. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span>  <span class="keyword">char</span>  *data =  <span class="keyword">new</span>  <span class="keyword">unsigned</span>  <span class="keyword">char</span>[size];  <span class="comment">// allocate 3 bytes per pixel </span></span><br><span class="line">fread(data,  <span class="keyword">sizeof</span>(<span class="keyword">unsigned</span>  <span class="keyword">char</span>), size, f);  <span class="comment">// read the rest of the data at once </span></span><br><span class="line">fclose(f);</span><br></pre></td></tr></table></figure>
+<p>We can now copy in the image data and then close the file.</p>
+<h3 id="Writing-Images-to-Disk"><a href="#Writing-Images-to-Disk" class="headerlink" title="Writing Images to Disk"></a>Writing Images to Disk</h3><p>We can write a struct to represent the headers.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span>  pack(2)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span>  <span class="title">BitmapFileHeader</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span>  header[<span class="number">2</span>]&#123;<span class="string">'B'</span>, <span class="string">'M'</span>&#125;;</span><br><span class="line">	<span class="keyword">int32_t</span> fileSize;</span><br><span class="line">	<span class="keyword">int32_t</span> reserved&#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">int32_t</span> dataOffset;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span>  <span class="title">BitmapInfoHeader</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int32_t</span> headerSize&#123;<span class="number">40</span>&#125;;</span><br><span class="line">	<span class="keyword">int32_t</span> width;</span><br><span class="line">	<span class="keyword">int32_t</span> height;</span><br><span class="line">	<span class="keyword">int16_t</span> planes&#123;<span class="number">1</span>&#125;;</span><br><span class="line">	<span class="keyword">int16_t</span> bitsPerPixel&#123;<span class="number">24</span>&#125;;</span><br><span class="line">	<span class="keyword">int32_t</span> compression&#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">int32_t</span> dataSize&#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">int32_t</span> horizontalResolution&#123;<span class="number">2400</span>&#125;;</span><br><span class="line">	<span class="keyword">int32_t</span> verticalResolution&#123;<span class="number">2400</span>&#125;;</span><br><span class="line">	<span class="keyword">int32_t</span> colors&#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">int32_t</span> importantColors&#123;<span class="number">0</span>&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>The previously linked <a href="https://en.wikipedia.org/wiki/BMP_file_format" target="_blank" rel="noopener">wikipedia</a> page about has more information on what these fields actually do. We use the <code>BITMAPINFOHEADER</code> version of the info header.</p>
+<p>Now to actually write the image to disk.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">BitmapInfoHeader infoHeader;</span><br><span class="line">BitmapFileHeader fileHeader;</span><br><span class="line">fileHeader.fileSize = <span class="keyword">sizeof</span>(BitmapFileHeader) + <span class="keyword">sizeof</span>(BitmapInfoHeader) + m_width * m_height * <span class="number">3</span>;</span><br><span class="line">fileHeader.dataOffset = <span class="keyword">sizeof</span>(BitmapFileHeader) + <span class="keyword">sizeof</span>(BitmapInfoHeader);</span><br><span class="line">infoHeader.width = m_width;</span><br><span class="line">infoHeader.height = m_height</span><br><span class="line"><span class="built_in">std</span>::ofstream file;</span><br><span class="line">file.open(filename, <span class="built_in">std</span>::ios::out | <span class="built_in">std</span>::ios::binary);</span><br><span class="line">file.write((<span class="keyword">char</span> *)&amp;fileHeader, <span class="keyword">sizeof</span>(fileHeader));</span><br><span class="line">file.write((<span class="keyword">char</span> *)&amp;infoHeader, <span class="keyword">sizeof</span>(infoHeader));</span><br><span class="line">file.write((<span class="keyword">char</span> *)m_data.get(), m_width * m_height * <span class="number">3</span>);</span><br><span class="line">file.close();</span><br><span class="line"><span class="keyword">return</span>  <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Most of the values that needed to be specified in the header are constant do not need to be modified.</p>
+<p>However, we still need to write the file size into the file header, and this can only be known at the time of writing.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fileHeader.fileSize = <span class="keyword">sizeof</span>(BitmapFileHeader) + <span class="keyword">sizeof</span>(BitmapInfoHeader) + m_width * m_height * <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<p>We write data offset, width and height similarly.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fileHeader.dataOffset = <span class="keyword">sizeof</span>(BitmapFileHeader) + <span class="keyword">sizeof</span>(BitmapInfoHeader);</span><br><span class="line">infoHeader.width = m_width;</span><br><span class="line">infoHeader.height = m_height</span><br></pre></td></tr></table></figure>
+
+<p>We open the file using a <code>ofstream</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::ofstream file;</span><br><span class="line">file.open(filename, <span class="built_in">std</span>::ios::out | <span class="built_in">std</span>::ios::binary);</span><br></pre></td></tr></table></figure>
+
+<p>We specify that we will be writing <code>out</code> to the file and we expect to be writing in <code>binary</code>.</p>
+<p>Now, write both headers and the data into a file, before closing it.  We cast the data to <code>char *</code> since the <code>ofstream</code> expects to be writing text.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file.write((<span class="keyword">char</span> *)&amp;fileHeader, <span class="keyword">sizeof</span>(fileHeader));</span><br><span class="line">file.write((<span class="keyword">char</span> *)&amp;infoHeader, <span class="keyword">sizeof</span>(infoHeader));</span><br><span class="line">file.write((<span class="keyword">char</span> *)m_data.get(), m_width * m_height * <span class="number">3</span>);</span><br><span class="line">file.close();</span><br></pre></td></tr></table></figure>
+
+<h3 id="Finding-the-Mean-Color"><a href="#Finding-the-Mean-Color" class="headerlink" title="Finding the Mean Color"></a>Finding the Mean Color</h3><p>This part was fairly easy, we can simply sum up the RGB values and divide them by the total amount of pixels to get the average color. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">RGB <span class="title">ret</span><span class="params">(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; m_width; x += <span class="number">10</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; m_height; y += <span class="number">10</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">auto</span> rgb = getRGB(x, y);</span><br><span class="line">		ret = ret + rgb;</span><br><span class="line">		n++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> ret / n;</span><br></pre></td></tr></table></figure>
+<p>I won’t go into detail about how the RGB class or <code>getRGB()</code> works, as more details are be found in the full source code.</p>
+<p>Here’s some results I got from the Avenger’s Trailer.</p>
+<p><img src="/images/avengers.png" alt=""></p>
+<h3 id="Using-Mode-Color"><a href="#Using-Mode-Color" class="headerlink" title="Using Mode Color"></a>Using Mode Color</h3><p>While, the results with the mean color were as expected. I wanted to see if I could get more vibrant spectrum using the mode color instead.  </p>
+<p>We would have to first cluster the colors (go from 24bit RGB to a lower bit value). Otherwise, it would be unlikely that enough of any specific 24bit RGB value would occur to yield any meaningful results. I found out that the “mode color” was basically always black, so I decided to filter out the black color from the results and got the following picture.</p>
+<p><img src="/images/avengers_mode.png" alt=""></p>
+<p>It didn’t look as a good as the mean color, so I left the project here.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Results"><span class="toc-number">1.</span> <span class="toc-text">Results</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Splitting-an-Image-into-Frames"><span class="toc-number">2.</span> <span class="toc-text">Splitting an Image into Frames</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reading-Images-into-Memory"><span class="toc-number">3.</span> <span class="toc-text">Reading Images into Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Writing-Images-to-Disk"><span class="toc-number">4.</span> <span class="toc-text">Writing Images to Disk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Finding-the-Mean-Color"><span class="toc-number">5.</span> <span class="toc-text">Finding the Mean Color</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Using-Mode-Color"><span class="toc-number">6.</span> <span class="toc-text">Using Mode Color</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/04/29/hello-world/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/04/29/hello-world/&text=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/04/29/hello-world/&title=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/04/29/hello-world/&is_video=false&description=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Average Frame of a Movie&body=Check out this article: http://yoursite.com/2020/04/29/hello-world/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/04/29/hello-world/&title=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/04/29/hello-world/&title=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/04/29/hello-world/&title=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/04/29/hello-world/&title=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/04/29/hello-world/&name=Average Frame of a Movie&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/04/29/hello-world/&t=Average Frame of a Movie" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Winston Zhao
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
