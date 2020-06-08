@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="IntroductionI’ve been playing around with trying to learn about reinforcement learning lately. It’s essentially how to teach a computer how to play a game. It’s such an interesting concept due to the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tic-Tac-Toe with Reinforcement Learning">
+<meta property="og:url" content="https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/index.html">
+<meta property="og:site_name" content="Winston&#39;s Blog">
+<meta property="og:description" content="IntroductionI’ve been playing around with trying to learn about reinforcement learning lately. It’s essentially how to teach a computer how to play a game. It’s such an interesting concept due to the">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://winstonzhao.github.io/images/mmmc_ovt.png">
+<meta property="og:image" content="https://winstonzhao.github.io/images/mmsl_ovt.png">
+<meta property="og:image" content="https://winstonzhao.github.io/images/ovll.png">
+<meta property="og:image" content="https://winstonzhao.github.io/images/ovl.png">
+<meta property="article:published_time" content="2020-06-08T12:45:29.000Z">
+<meta property="article:modified_time" content="2020-06-08T13:48:05.696Z">
+<meta property="article:author" content="Winston Zhao">
+<meta property="article:tag" content="Reinforcement Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://winstonzhao.github.io/images/mmmc_ovt.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/logo.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/logo.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
+          
+        
+    
+    <!-- title -->
+    <title>Tic-Tac-Toe with Reinforcement Learning</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/04/29/Finding-Asian-Girls-on-Tinder/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&text=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&title=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&is_video=false&description=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Tic-Tac-Toe with Reinforcement Learning&body=Check out this article: https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&title=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&title=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&title=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&title=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&name=Tic-Tac-Toe with Reinforcement Learning&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&t=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reinforcement-Learning"><span class="toc-number">2.</span> <span class="toc-text">Reinforcement Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Tic-Tac-Toe"><span class="toc-number">2.1.</span> <span class="toc-text">Tic-Tac-Toe</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithms"><span class="toc-number">2.2.</span> <span class="toc-text">Algorithms</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Minimax-Monte-Carlo"><span class="toc-number">2.2.1.</span> <span class="toc-text">Minimax Monte-Carlo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Minimax-Sarsa-Lambda"><span class="toc-number">2.2.2.</span> <span class="toc-text">Minimax Sarsa-Lambda</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Tic-Tac-Toe with Reinforcement Learning
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Winston's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-06-08T12:45:29.000Z" itemprop="datePublished">2020-06-08</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Reinforcement-Learning/" rel="tag">Reinforcement Learning</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>I’ve been playing around with trying to learn about reinforcement learning lately. It’s essentially how to teach a computer how to play a game. It’s such an interesting concept due to the way it emulates life, I mean, isn’t every living organism just a reinforcement learning agent that used a variety of algorithms to try optimize for the propagation of species? At the end of the day, every “action” we take is the output of millions of years of evolution.</p>
+<p>While, I might not be able to create a “god” algorithm yet. I’ll start with something similarly interesting (joke), tic-tac-toe. I watched the lectures from this course (<a href="https://www.youtube.com/watch?v=2pWv7GOvuf0&list=PLqYmG7hTraZBiG_XpjnPrSNw-1XQaM_gB&index=1" target="_blank" rel="noopener">link</a>), to learn about reinforcement learning and decided to try give it a go. I quickly prototyped a self-play algorithm that used the sarsa-lambda algorithm training two agents via self play (<a href="https://github.com/winstonzhao/reinforcement-ttt" target="_blank" rel="noopener">repo link</a>). But, to be frank, the code is absolutely terrible, I was going for code output over quality to finally put my hours of lecture watching to action. I learned about tf-agents (<a href="https://github.com/tensorflow/agents/tree/720a7bc9e7519d1ca7749fa71189e9c3aa1a5483/tf_agents" target="_blank" rel="noopener">link</a>) and was impressed by the design of their framework and thought it would be a good idea to try create one myself. After, I had created the architecture for the components of the framework, I went back to a tic-tac-toe as a trial run with two algorithms with the plan to compare and analyze their performance and paramterization.</p>
+<h1 id="Reinforcement-Learning"><a href="#Reinforcement-Learning" class="headerlink" title="Reinforcement Learning"></a>Reinforcement Learning</h1><h2 id="Tic-Tac-Toe"><a href="#Tic-Tac-Toe" class="headerlink" title="Tic-Tac-Toe"></a>Tic-Tac-Toe</h2><p>I found that Tic-Tac-Toe is a good environment to play around with reinforcement learning in for a variety of reasons. One of which, is that the state space small enough that we can actually do a full state space search create the optimal policy for playing. This allows us to judge the performance of our algorithms against a “real” metric to get some additional insight into our performance.</p>
+<p>The algorithm that we use to find this optimal policy is called a minimax tree search, essentially we can mimic the different motivations of two opposing players in tic-tac-toe by alternating between looking for actions that maximize and actions that minimize our “score”. Where a score of -1 maybe the cross side winning and a score of 1 represents the circle side winning. Essentially, we are minimizing the maximum values are every step of the search, hench the name, minimax.</p>
+<p>By comparing the policies that are created by our agents against the see for what percentage of the states we have an optimal policy for.</p>
+<h2 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h2><p>The algorithms that were used are both q-learning agents with no value function approximation. What this means is that the optimization problem we have is trying to find the “value” of each state-action pair and when we are presented with a state, we will find the state-action pair that has the highest (or lowest) value with that state, and pick the corresponding action. No value function approximation means that we will store and attempt to optimize q-values for each state-action pair that exists in the state space. In practice, for complex tasks, usually a value function approximator (e.g. deep-NN or other ML algo) is used that meaning that we take features of our state to map to a q-value instead.</p>
+<h3 id="Minimax-Monte-Carlo"><a href="#Minimax-Monte-Carlo" class="headerlink" title="Minimax Monte-Carlo"></a>Minimax Monte-Carlo</h3><p>Monte-Carlo is an algorithm that will play a full game and then when it gets a reward, it will attribute equal participation to all state-actions pairs that were observed during that game or “episode”. This is probably the simplest reinforcement learning algorithm and the biggest flaw with it is probably the fact that it does not discount the participation of earlier moves. E.g. when we lose, it maybe that it wasn’t the move that we started with that caused us to lose, and potentially we should attribute less of the reason lost to actions that we took earlier. Monte-Carlo does not do this.</p>
+<p>Monte-Carlo has two parameters that I played with, alpha (the learning rate) and epsilon (the exploration rate).</p>
+<p>Here are the results:<br><img src="/images/mmmc_ovt.png" alt=""></p>
+<p>Remember that optimality, represents the percentage of states where an optimal decision was picked by the output policy. We can see that I probably didn’t make any obvious errors with my algorithm as for the most part the algorithm does get decent optimality. Unfortunately, it did not create the optimal policy.</p>
+<h3 id="Minimax-Sarsa-Lambda"><a href="#Minimax-Sarsa-Lambda" class="headerlink" title="Minimax Sarsa-Lambda"></a>Minimax Sarsa-Lambda</h3><p>Sarsa-Lambda is an algorithm that will probably the immediate reward backward at every time step and also will discount the participation attributed to previous timesteps. It is advantageous as it trains on every time step as opposed to every episode for monte-carlo and also that it discounts the reward.</p>
+<p>It has four parameters, alpha (learning rate), epsilon (exploration rate), lambda (time-based discount factor) and gamma (reward-based discount factor).</p>
+<p>Here are the results:<br><img src="/images/mmsl_ovt.png" alt=""></p>
+<p>Sarsa-lambda converges upon the optimal policy.</p>
+<p>An interesting observation is the relationship between optimality and training loss.<br>We can see that log less is roughly inversely proportional to optimality.<br><img src="/images/ovll.png" alt=""></p>
+<p>We can also see, we have likely converged when the loss starts fluctuating around zero (the algorithm has reached an equillibrium). We can see this in the log loss graph as the loss dips into the negative value range (the empty strip in the log loss graph) before fluctating around positive values around zero.<br><img src="/images/ovl.png" alt=""></p>
+<p>This information is useful when we will consider problems that we cannot find the optimal policy for. This gives us a good idea about when we have reached the limits of our model. Keep in mind that not all models will actually converge to the optimal policy, in the monte-carlo vs optimality graph, we can see that the algorithm does converge, just not on the optimal value.</p>
+<p>It will be interesting to see where I can take this project in the future. However, regardless of how I choose to proceed, it’ll likely be preceeded by much study and reading. So, maybe it’ll take awhile to make any significant progress. However, hopefully we’ll see more from me in this project, as it is a very interesting problem space.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reinforcement-Learning"><span class="toc-number">2.</span> <span class="toc-text">Reinforcement Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Tic-Tac-Toe"><span class="toc-number">2.1.</span> <span class="toc-text">Tic-Tac-Toe</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithms"><span class="toc-number">2.2.</span> <span class="toc-text">Algorithms</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Minimax-Monte-Carlo"><span class="toc-number">2.2.1.</span> <span class="toc-text">Minimax Monte-Carlo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Minimax-Sarsa-Lambda"><span class="toc-number">2.2.2.</span> <span class="toc-text">Minimax Sarsa-Lambda</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&text=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&title=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&is_video=false&description=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Tic-Tac-Toe with Reinforcement Learning&body=Check out this article: https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&title=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&title=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&title=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&title=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&name=Tic-Tac-Toe with Reinforcement Learning&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://winstonzhao.github.io/2020/06/08/rl-ttt-mmmc-mmsl/&t=Tic-Tac-Toe with Reinforcement Learning" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Winston Zhao
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
